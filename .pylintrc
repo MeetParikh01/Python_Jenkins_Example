@@ -1,0 +1,7 @@
+[MASTER]
+ignore=migrations,README.md,docker-compose.yml
+
+[DESIGN]
+# Maximum number of statements in function / method body
+max-statements=15
+disable=W0611
