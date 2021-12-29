@@ -1,7 +1,19 @@
 [MASTER]
 ignore=migrations,README.md,docker-compose.yml
+disable=W0611
+load-plugins=pylint.extensions.mccabe
+
 
 [DESIGN]
 # Maximum number of statements in function / method body
 max-statements=15
-disable=W0611
+min-similarity-lines=3
+
+# McCabe to external extension to check the complexity of the code
+max-complexity=5
+
+# To check that maximum only 3 if..else is allowed
+max-nested-blocks=3
+
+# To check maximum only 10 total branches (if..else..) is allowed
+max-branches=10
