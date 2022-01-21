@@ -1,6 +1,6 @@
 [MASTER]
 ignore=migrations,README.md,docker-compose.yml
-disable=W0611
+disable=W0611,R0201
 load-plugins=pylint.extensions.mccabe
 
 
