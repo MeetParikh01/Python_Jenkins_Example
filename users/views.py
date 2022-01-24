@@ -39,7 +39,7 @@ class LoggedInView(View):
         @param request: Request Object received in request
         @return: render: It is used to load the html file with the data
         """
-        return render(request, "users/user.html", status=HTTPStatus.O)
+        return render(request, "users/user.html", status=HTTPStatus.OK)
 
 
 class CustomLogoutView(LogoutView):

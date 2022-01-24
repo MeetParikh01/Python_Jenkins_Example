@@ -1,7 +1,7 @@
-version: "3.8"
+version: "3"
 
 services:
-    postgres:
+    postgres_db:
         container_name: pg-container
         image: postgres:14.1
         ports:
@@ -10,6 +10,40 @@ services:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
         volumes:
-            - ./pg_data:/var/lib/postgresql/data
-            - ./infile:/infile
-            - ./db_backup:/tmp
+            - /home/er/Project/Docker_Compose_Files/Postgres/pg_data:/var/lib/postgresql/data
+            - /home/er/Project/Docker_Compose_Files/Postgres/infile:/infile
+            - /home/er/Project/Docker_Compose_Files/Postgres/db_backup:/tmp
+
+    adminer:
+        container_name: adminer-container
+        image: adminer:4.8.1-standalone
+        ports:
+            - "8081:8080"
+        restart: always
+
+    server:
+        build: .
+        image: jenkins_django_app_project:latest
+        container_name: jenkins_django_app_container
+        ports:
+            -   "80:80"
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - HOST=postgres_db
+            - PORT=5432
+            - DEBUG=False
+        command: >
+            bash -c "source ../env/bin/activate && python manage.py runserver 0.0.0.0:80"
+#            - python
+#            - manage.py
+#            - runserver
+#            - --noreload
+#            - echo ls
+#            - gunicorn --bind 0.0.0.0:8000 django_chat_project.wsgi
+#            - /bin/bash -c "source /projects/env/bin/activate"
+#            - /projects/env/bin/activate"
+#            - python manage.py runserver
+
+        depends_on:
+            -   postgres_db
