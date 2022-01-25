@@ -34,16 +34,6 @@ services:
             - PORT=5432
             - DEBUG=False
         command: >
-            bash -c "source ../env/bin/activate && python manage.py runserver 0.0.0.0:80"
-#            - python
-#            - manage.py
-#            - runserver
-#            - --noreload
-#            - echo ls
-#            - gunicorn --bind 0.0.0.0:8000 django_chat_project.wsgi
-#            - /bin/bash -c "source /projects/env/bin/activate"
-#            - /projects/env/bin/activate"
-#            - python manage.py runserver
-
+            bash -c "python manage.py runserver 0.0.0.0:80"
         depends_on:
             -   postgres_db
